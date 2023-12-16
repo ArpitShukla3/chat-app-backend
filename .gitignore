@@ -9,7 +9,7 @@
 /build/          # Ignore the 'build' directory
 
 # Ignore files generated during development
-node_modules/    # Ignore Node.js modules
+./node_modules    # Ignore Node.js modules
 dist/            # Ignore distribution files
 
 # Ignore system-specific files
