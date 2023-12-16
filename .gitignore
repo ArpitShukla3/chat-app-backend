@@ -1,0 +1,28 @@
+# Ignore comments start with a hash (#) symbol
+
+# Ignore specific file types
+*.log            # Ignore log files
+*.class          # Ignore compiled Java class files
+*.jar            # Ignore Java archive files
+
+# Ignore directories
+/build/          # Ignore the 'build' directory
+
+# Ignore files generated during development
+node_modules/    # Ignore Node.js modules
+dist/            # Ignore distribution files
+
+# Ignore system-specific files
+.DS_Store        # Ignore macOS system files
+Thumbs.db        # Ignore Windows thumbnail files
+
+# Ignore configuration files
+config.ini       # Ignore a specific configuration file
+
+# Ignore temporary files
+*.tmp            # Ignore temporary files
+*.swp            # Ignore Vim swap files
+
+# Ignore sensitive information
+secrets.txt      # Ignore a file containing sensitive information
+.env
