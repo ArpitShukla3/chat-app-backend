@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 // import { createServer } from 'node:http';
 import http from 'http';
 const app = express();
+app.use(cors());
 dataBaseConnect();
 const PORT = process.env.PORT || 4000;
 //socket setup
@@ -42,7 +43,6 @@ io.on('connection', (socket) => {
 server.listen(PORT, function () {
     console.log("server is listening at port", PORT);
 })
-app.use(cors());
 app.use(express.json()) // to accept json data
 app.use("/api/user", userRoute);
 app.use("/api/chat", chatRoute);
