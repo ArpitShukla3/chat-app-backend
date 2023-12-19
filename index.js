@@ -5,12 +5,39 @@ import chatMessages from "./Routes/chatMessages.js";
 import cors from "cors";
 import dataBaseConnect from "./config/Connection.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
-
+import { Server } from "socket.io";
+// import { createServer } from 'node:http';
+import http from 'http';
 const app = express();
 dataBaseConnect();
 const PORT = process.env.PORT || 4000;
-//App Setup
-app.listen(PORT, function () {
+//socket setup
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: true
+});
+
+
+
+io.on('connection', (socket) => {
+    socket.on('setup', (userData, cb) => {
+        socket.join(userData._id);
+        socket.emit("connected");
+    });
+    socket.on("join chat", (roomId) => {
+        socket.join(roomId);
+    });
+    socket.on("new message", (newMessageRecieved) => {
+        var chat = newMessageRecieved.chat;
+        if (!chat.users) return console.log("chat.users not defined");
+        chat.users.forEach((user) => {
+            if (user._id == newMessageRecieved.sender._id) return;
+            socket.in(user._id).emit("message recieved", newMessageRecieved);
+        });
+    })
+});
+//App Setup 
+server.listen(PORT, function () {
     console.log("server is listening at port", PORT);
 })
 app.use(cors());
