@@ -20,7 +20,7 @@ const io = new Server(server, {
 
 
 io.on('connection', (socket) => {
-    socket.on('setup', (userData, cb) => {
+    socket.on('setup', (userData) => {
         socket.join(userData._id);
         socket.emit("connected");
     });
@@ -35,6 +35,8 @@ io.on('connection', (socket) => {
             socket.in(user._id).emit("message recieved", newMessageRecieved);
         });
     })
+    socket.on("typing", (room) => socket.to(room).emit("typing"));
+    socket.on("stop typing", (room) => socket.to(room).emit("stop typing"));
 });
 //App Setup 
 server.listen(PORT, function () {
