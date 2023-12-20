@@ -9,7 +9,11 @@ import { Server } from "socket.io";
 // import { createServer } from 'node:http';
 import http from 'http';
 const app = express();
-app.use(cors());
+app.use(cors(
+  {
+    origin:"https://chat-app-frontend-iota-pink.vercel.app",
+   credentials:true
+}
 dataBaseConnect();
 const PORT = process.env.PORT || 4000;
 //socket setup
