@@ -47,10 +47,7 @@ io.on('connection', (socket) => {
 server.listen(PORT, function () {
     console.log("server is listening at port", PORT);
 })
-<<<<<<< HEAD
 
-=======
->>>>>>> 6c5881c9c70f7be3f1e972c3a9a39b8d2077c7d9
 app.use(express.json()) // to accept json data
 app.use("/api/user", userRoute);
 app.use("/api/chat", chatRoute);
